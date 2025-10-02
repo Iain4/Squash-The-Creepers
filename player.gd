@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		# needed incase mobs already been deleted this frame
 		if collision.get_collider() == null:
 			continue
-			
+			 
 		if collision.get_collider().is_in_group("mob"):
 			var mob = collision.get_collider()
 			
