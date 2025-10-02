@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p11y5"]
 size = Vector3(1.675, 1, 2)
 
-[node name="Mob" type="CharacterBody3D"]
+[node name="Mob" type="CharacterBody3D" groups=["mob"]]
 collision_layer = 2
 script = ExtResource("1_nokgg")
 
