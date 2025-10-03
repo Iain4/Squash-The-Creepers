@@ -4,7 +4,9 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	clear_mobs()
+	$Hud.set_max_health($Player.health)
+	$Hud.update_health($Player.health)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,10 +35,13 @@ func clear_mobs():
 
 func _on_player_hit() -> void:
 	clear_mobs()
-	# needs to update the hud
-
+	$Hud.update_health($Player.health)
 
 
 func _on_player_dead() -> void:
 	$MobTimer.stop()
 	# needes to also tell the hud
+
+
+func _on_player_squish() -> void:
+	$Hud.update_score($Player.score)

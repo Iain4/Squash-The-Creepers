@@ -1,12 +1,13 @@
 extends CharacterBody3D
 signal hit
 signal dead
+signal squish
 
 @export var speed = 14
 @export var fall_acceleration = 75
 @export var jump_impulse  =20
 @export var bounce_impulse = 16
-@export var health = 1
+@export var health = 3
 @export var score = 0
 
 var target_velocity = Vector3.ZERO
@@ -54,6 +55,7 @@ func _physics_process(delta: float) -> void:
 				mob.squash()
 				target_velocity.y = bounce_impulse
 				score += 1
+				squish.emit()
 				break # to prvent duplicate calls
 
 
