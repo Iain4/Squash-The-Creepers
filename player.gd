@@ -1,11 +1,16 @@
 extends CharacterBody3D
+signal hit
+signal dead
 
 @export var speed = 14
 @export var fall_acceleration = 75
 @export var jump_impulse  =20
 @export var bounce_impulse = 16
+@export var health = 1
+@export var score = 0
 
 var target_velocity = Vector3.ZERO
+
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector3.ZERO
@@ -48,4 +53,20 @@ func _physics_process(delta: float) -> void:
 			if Vector3.UP.dot(collision.get_normal()) > 0.1:
 				mob.squash()
 				target_velocity.y = bounce_impulse
+				score += 1
 				break # to prvent duplicate calls
+
+
+func _on_mob_detector_body_entered(body: Node3D) -> void:
+	damaged()
+	if health == 0:
+		die()
+	
+func damaged():
+	health -= 1
+	hit.emit()
+	
+func die():
+	dead.emit()
+	queue_free()
+	
